@@ -6,11 +6,7 @@ local themes = require('telescope.themes')
 qs("<Leader>ff", tls.find_files, "[F]ind [F]iles")
 qs("<Leader>fg", tls.live_grep, "[F]ind [L]ive Grep")
 --qs("<Leader>fb", tls.buffers(themes.get_dropdown{ previewer = false, layout_config = { width = 0.75 } }), "[F]ind existing [B]uffers")
-vim.keymap.set("n", "<Leader>fb", function()
-    tls.buffers(themes.get_dropdown{ previewer = true, layout_config = { width = 0.75 } })
-end,
-    { desc = "[F]ind existing [B]uffers" }
-);
+qs("<Leader>fb", tls.buffers, "[F]ind existing [B]uffers");
 
 vim.keymap.set("n", "z=", function ()
     tls.spell_suggest(themes.get_cursor())
@@ -38,9 +34,9 @@ qs("<Leader>gh", tls.git_stash, "[G]it stas[H]")
 qs("<Leader>gb", tls.git_branches, "[G]it [B]ranches")
 qs("<Leader>gf", tls.git_files,  '[G]it [F]iles' )
 
---qs("<Leader>pm", [[:Telescope project <CR>]],  '[P]roject [M]anager' )
+qs("<Leader>\\", tls.current_buffer_fuzzy_find, '[\\] Fuzzily search in current buffer');
+qs("?", tls.current_buffer_fuzzy_find, '[?] Fuzzily search in current buffer');
 
-qs("<Leader>\\", function () tls.current_buffer_fuzzy_find(themes.get_dropdown {windblend = 10, previewer = false, layout_config = { height = 0.9 } }) end, '[\\] Fuzzily search in current buffer')
 qs("<Leader>fG", function () tls.live_grep { grep_open_files = true, prompt_title = 'Live Grep in Open Files' } end, '[F]ind Live [*G]rep in Open Files')
 qs("<Leader>fv", function () tls.find_files { cwd = vim.fn.stdpath 'config' } end, '[F]ind Neo[V]im files')
 
