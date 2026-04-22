@@ -93,15 +93,13 @@ require('telescope').setup {
 
     pickers = {
         current_buffer_fuzzy_find = _qdefvert{ height = 0.75, previewer = false, title = "[ Search ]" },
-        find_files = _qdefvert{ height = 0.9, title = "[ Find Files ]", percent = { preview = 0.75, results = 0.25 }, mirror = false },
+        find_files = _qdefvert{ height = 0.9, title = "[ Find Files ]", percent = { preview = 0.65, results = 0.35 }, mirror = false },
+        find_buffers = _qdefvert{ height = 0.75, previewer = true, title = "[ Buffers ]" , percent = { preview = 0.5, results = 0.5 }},
+        diagnostics = _qdefvert{ height = 0.9, previewer = true, title = "[ Diagnostics ]" , percent = { preview = 0.6, results = 0.4 }, mirror = false },
         live_grep = {
             initial_mode = "insert",
             theme = "ivy",
         },
-        find_buffers = {
-            theme = "cursor"
-
-        }
     },
 
     extensions = {
