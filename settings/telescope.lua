@@ -7,10 +7,23 @@ local themes = require('telescope.themes')
 
 require('telescope').setup {
     defaults = {
+        -- UI
         prompt_prefix = " ",
         selection_caret = " ",
-        path_display = { "smart" },
-        file_ignore_patterns = { "node_modules", ".git" },
+        color_devicons = true,
+
+        -- Layout
+
+        -- Behavior
+        file_ignore_patterns = {
+            "node_modules",
+            "%.git/",
+            "build/",
+            "%.DS_Store",
+        },
+        path_display = { "truncate" },
+
+        -- Mappings
         mappings = {
             i = {
                 ["<C-f>"] = actions.send_selected_to_qflist + actions.open_qflist,
@@ -22,6 +35,28 @@ require('telescope').setup {
             n = {
                 ["q"] = actions.close
             }
+        },
+
+        -- ripgrep
+        vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            "--hidden",
+        },
+    },
+
+    pickers = {
+        find_files = {
+            initial_mode = "insert",
+        },
+        live_grep = {
+            initial_mode = "insert",
+            theme = "ivy",
         }
     },
 
@@ -35,20 +70,8 @@ require('telescope').setup {
             override_file_sorter = true,      -- override the file sorter
             case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
         }
-        --repo = {
-        --    list = {
-        --        fd_opts = {
-        --            '--no-ignore-vcs',
-        --        },
-        --        search_dirs = {
-        --            "~/my_projects"
-        --        }
-        --    }
-        --}
     },
 }
-
-
 
 pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'ui-select')
@@ -59,7 +82,25 @@ local qs = _G.qnmap
 
 qs("<Leader>ff", tls.find_files, "[F]ind [F]iles")
 qs("<Leader>fg", tls.live_grep, "[F]ind [L]ive Grep")
-qs("<Leader>fb", tls.buffers(themes.get_dropdown{ previewer = false, layout_config = { width = 0.75 } }), "[F]ind existing [B]uffers")
+--qs("<Leader>fb", tls.buffers(themes.get_dropdown{ previewer = false, layout_config = { width = 0.75 } }), "[F]ind existing [B]uffers")
+vim.keymap.set("n", "<Leader>fb", function()
+    tls.buffers(themes.get_dropdown{ previewer = false, layout_config = { width = 0.75 } })
+end,
+    { desc = "[F]ind existing [B]uffers" }
+);
+
+vim.keymap.set("n", "<Leader>fq", function ()
+    tls.find_files(themes.get_dropdown({ previewer = false, layout_config = { width = 0.75 } }))
+end,
+    { desc = "[F]ind [Q]uick Files" }
+);
+
+vim.keymap.set("n", "z=", function ()
+    tls.spell_suggest(themes.get_cursor())
+end,
+    { desc = "[Z]pell [=]Suggestions" }
+);
+
 qs("<Leader>fh", tls.help_tags, "[F]ind [H]elp")
 qs("<Leader>fk", tls.keymaps, "[F]ind [K]eymaps")
 qs("<Leader>fr", tls.resume, "[F]ind [R]esume")
