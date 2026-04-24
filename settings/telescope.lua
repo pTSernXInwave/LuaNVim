@@ -10,7 +10,7 @@ local function _qdefvert(opt)
     opt = opt or {}
 
     if opt.previewer == nil then opt.previewer = true end
-    if opt.mirror == nil then opt.mirror = true end
+    if opt.mirror == nil then opt.mirror = false end
 
     opt.height = opt.height or 0.9
     opt.width = opt.width or 0.85
@@ -18,11 +18,14 @@ local function _qdefvert(opt)
     opt.layout = opt.layout or "vertical"
     opt.sorting = opt.sorting or "descending"
     opt.position = opt.position or "bottom"
+    opt.theme = opt.theme or "ivy"
 
     opt.percent = opt.percent or {
-        preview = 0.75,
-        results = 0.25,
+        preview = 0.65,
+        results = 0.35,
     }
+
+    opt.path_display = opt.path_display or { "smart" }
 
     return {
         initial_mode = opt.mode,
@@ -30,6 +33,8 @@ local function _qdefvert(opt)
         layout_strategy = opt.layout,
         sorting_strategy = opt.sorting,
         prompt_title = opt.title,
+        theme = opt.theme,
+        path_display = opt.path_display,
 
         layout_config = {
             width = opt.width,
@@ -92,13 +97,25 @@ require('telescope').setup {
     },
 
     pickers = {
-        current_buffer_fuzzy_find = _qdefvert{ height = 0.75, previewer = false, title = "[ Search ]" },
-        find_files = _qdefvert{ height = 0.9, title = "[ Find Files ]", percent = { preview = 0.65, results = 0.35 }, mirror = false },
-        find_buffers = _qdefvert{ height = 0.75, previewer = true, title = "[ Buffers ]" , percent = { preview = 0.5, results = 0.5 }},
-        diagnostics = _qdefvert{ height = 0.9, previewer = true, title = "[ Diagnostics ]" , percent = { preview = 0.6, results = 0.4 }, mirror = false },
-        live_grep = {
-            initial_mode = "insert",
-            theme = "ivy",
+        current_buffer_fuzzy_find = _qdefvert{
+            height = 0.75,
+            previewer = false,
+            title = "[ Search ]",
+            theme = "dropdown",
+        },
+        find_files = _qdefvert{
+            title = "[ Find Files ]",
+        },
+        find_buffers = _qdefvert{
+            height = 0.5,
+            previewer = false,
+            title = "[ Buffers ]",
+        },
+        diagnostics = _qdefvert{
+            title = "[ Diagnostics ]",
+        },
+        live_grep = _qdefvert{
+            title = "[ Live Grep ]",
         },
     },
 
