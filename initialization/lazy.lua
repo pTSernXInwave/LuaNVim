@@ -74,9 +74,6 @@ require("lazy").setup(
         'echasnovski/mini.surround',
         'echasnovski/mini.icons',
         'echasnovski/mini.deps',
-
-
-
         {
             'lukas-reineke/indent-blankline.nvim',
             event = "User FilePost",
@@ -94,8 +91,11 @@ require("lazy").setup(
                 --dofile(GGlobal.base46_cache .. 'blankline')
             end
         },
+        {
+            'kevinhwang91/nvim-ufo',
+            dependencies = 'kevinhwang91/promise-async',
+        },
         --#endregion
-
 
 
 

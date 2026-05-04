@@ -47,3 +47,5 @@ dofile(root .. 'codesnap.lua')
 
 dofile(root .. 'keys.lua')
 dofile(root .. 'copilot.lua')
+
+dofile(root .. 'ufo.lua')

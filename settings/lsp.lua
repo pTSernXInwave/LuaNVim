@@ -1,25 +1,25 @@
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = LSP.protocol.make_client_capabilities()
 capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
 -- Set global defaults for all LSP servers
-vim.lsp.config('*', {
+LSP.config('*', {
   capabilities = capabilities,
 })
 
-vim.lsp.enable('pyright')
+LSP.enable('pyright')
 
 local root = g_root .. 'settings/lsp/'
 dofile(root .. 'deno.lua')
 
-vim.lsp.config('clangd', {
+LSP.config('clangd', {
   cmd = { 'clangd' },
   filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'h' },
   single_file_support = true,
 })
-vim.lsp.enable('clangd')
+LSP.enable('clangd')
 
-vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+API.nvim_create_autocmd('LspAttach', {
+    group = API.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
     callback = function(event)
 
         local qnmap = function(key, mechanic, desc)

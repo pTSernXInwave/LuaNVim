@@ -117,6 +117,10 @@ require('telescope').setup {
         live_grep = _qdefvert{
             title = "[ Live Grep ]",
         },
+        marks = _qdefvert{
+            height = 0.75,
+            title = "[ Marks ]",
+        },
     },
 
     extensions = {
