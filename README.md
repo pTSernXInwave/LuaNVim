@@ -18,6 +18,7 @@
 
 - Neovim setup powered by [💤 Lazy](https://github.com/folke/lazy.nvim)
 - Core:
+    + Key Bindings: [📖 Full Key Mapping Guide](KEY_BINDS.md)
     + File Manager:
         * Fuzzy Finder: [Telescope](https://github.com/nvim-telescope/telescope.nvim)
         * Side Tab Tree:
@@ -50,6 +51,7 @@
 	+ [fd](https://github.com/sharkdp/fd)
 	
 - Key Mapping:
+    + [📖 Comprehensive Key Bindings Guide](KEY_BINDS.md)
     + ~~[FZF](wiki/fzf.md)~~ (Using `Telescope` instead)
     + ~~[COC](wiki/coc.md)~~ (Using `LSP` instead)
     + [Nvim CheatSheet](wiki/cheatsheet.md)
